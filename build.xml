@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+ 
+<project name="hadoop-hdfs" default="pack"> 
+ 
+	<property name="src.dir" value="src" />  
+	<property name="report.dir" value="report" />
+	<property name="classes.dir" value="bin" />
+	<property name="lib.dir" value="lib" /> 
+	<property name="dist.dir" value="dist" /> 	
+ 
+	<!-- 定义classpath -->
+	<path id="master-classpath"> 
+		<fileset file="${lib.dir}/*.jar" />  
+		<pathelement path="${classes.dir}"/>  
+	</path>
+ 
+	<!-- 初始化任务 -->
+	<target name="init">
+	</target>
+ 
+	<!-- 编译 -->	
+	<target name="compile" depends="init" description="compile the source files"> 
+		<mkdir dir="${classes.dir}"/> 
+		<javac srcdir="${src.dir}" destdir="${classes.dir}" includeAntRuntime="false" target="1.8">  
+			<classpath refid="master-classpath"/>  
+		</javac> 
+	</target>
+ 
+ 
+	<!-- 打包成jar -->	  
+	<target name="pack"  description="make .jar file"> 
+		<mkdir dir="${dist.dir}" /> 
+		<jar destfile="${dist.dir}/wordcount.jar" basedir="${classes.dir}">  
+            <manifest>
+                <attribute name="Main-Class" value="org.myorg.WordCount"/>
+                <attribute name="Class-Path" value="."/>
+            </manifest>	 
+		</jar>
+	</target>  
+	
+</project>
