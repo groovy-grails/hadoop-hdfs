@@ -1,1 +1,1 @@
-# myBigDataLearning001
+# hadoop hdfsClient ; hadoop mapreduce applications
